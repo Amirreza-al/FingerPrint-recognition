@@ -32,13 +32,14 @@ pip install torch torchvision numpy matplotlib seaborn pillow torchsummary graph
 
 ## Dataset
 
-The model was trained on the FVC2002 fingerprint dataset. The evaluation notebook expects fingerprint images in the "user_finger_prints" directory, with filenames formatted as "user_id.png".
+The model was trained on the FVC2002 fingerprint dataset. The evaluation notebook expects fingerprint images with filenames formatted as "user_id.png".
+('id' in image name should be 01, 02, 03, ...)
 
 ## Running the Code
 
 ### Training the Model
 
-1. Ensure you have the FVC2002 dataset downloaded and stored in a directory named "FVC2002"
+1. Ensure you have the FVC2002 dataset downloaded and stored locally.
 2. Open and run the Jupyter Notebook:
 
   jupyter notebook fingerprint_recognition_train.ipynb
@@ -48,6 +49,13 @@ The model was trained on the FVC2002 fingerprint dataset. The evaluation noteboo
    - Define and initialize the Siamese Network model
    - Train the model for the specified number of epochs
    - Evaluate model performance on the test set
+
+### visualization of siamese network
+![image](https://github.com/user-attachments/assets/40943a4e-95a4-49d2-ad38-2f46f2ac6378)
+
+### training loss
+there is no significant improvement after 10 epochs
+![image](https://github.com/user-attachments/assets/6b97369e-68ba-484b-9e7f-6ca32d2752dc)
 
 ### Evaluating the Model
 
@@ -66,9 +74,9 @@ jupyter notebook fingerprint_recognition_eval.ipynb
 
 The fingerprint recognition system achieves the following performance metrics:
 
-- **Test Accuracy**: >90% on the FVC2002 dataset
-- **Average Processing Time**: Less than 5ms per fingerprint comparison
-- **Recognition Threshold**: Adjustable based on security requirements (default: 0.05)
+- **Test Accuracy**: 93.75% on the FVC2002 dataset
+- **Average Processing Time**: 0.0055 seconds (used Nvidia Tesla T4)
+![image](https://github.com/user-attachments/assets/c433d577-6c46-4abf-867f-1317ac4cf207)
 
 The system first extracts a 128-dimensional embedding from each fingerprint using the trained Siamese Network, then compares embeddings using Euclidean distance to determine identity.
 
@@ -79,10 +87,6 @@ The fingerprint recognition model uses a modified ResNet18 backbone with the fol
 - Input layer modified to accept grayscale images
 - Final fully connected layers replaced with a custom embedding network
 - Trained using contrastive loss to minimize distance between same-identity fingerprints and maximize distance between different identities
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 
